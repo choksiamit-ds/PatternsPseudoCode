@@ -4,7 +4,26 @@ Servers - publish
 Broker  - mediate
 Subscribers - subscribe
 
-servers initialize the brokers by calling addBroker. Subscribers subscribe to events published by specific servers. Broker maintains a mapping of server to the list of subscribers. when any event is received from a server, the event is published to all the subscribers for that server.
+servers initialize the brokers by calling addBroker. 
+Subscribers subscribe to events published by specific servers. 
+Broker maintains a mapping of server to the list of subscribers. when any event is received from a server, the event is published to all the subscribers for that server.
+
+Broker
+	addPublisher
+	map { pub : list<subscribers>}
+	publish() {
+	publishAll(map1)} { for each subscriber : sub->rcvEvent() }
+
+Subscriber
+  addBroker
+  subscribe
+  rcvEvent
+
+Server 
+  brokerList
+  addBroker()
+  publish()
+
 
 Limitation : This does not have a granularity of receiving on specific events from a server that the subscriber is subscribed to. Instead it receives all the events published by the server.
 
