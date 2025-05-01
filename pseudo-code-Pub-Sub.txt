@@ -1,0 +1,129 @@
+1. Pattern 1 pub-sub
+
+Servers - publish
+Broker  - mediate
+Subscribers - subscribe
+
+servers initialize the brokers by calling addBroker. Subscribers subscribe to events published by specific servers. Broker maintains a mapping of server to the list of subscribers. when any event is received from a server, the event is published to all the subscribers for that server.
+
+Limitation : This does not have a granularity of receiving on specific events from a server that the subscriber is subscribed to. Instead it receives all the events published by the server.
+
+
+enum Servers {
+	FrontendServer = 1
+	DbServer
+	DbReplica
+	ChatServer
+	ShoppingCart
+	BackendServer
+}
+
+Broker {
+	Metrics
+	Logging
+	Tracking
+}
+
+Subscribers { 
+	MetricsUI
+	MetricsAnalysis
+	ActiveMonitoring
+	DbMonitor
+	LogSearch
+	SecurityAnalysis
+	OfflineProcessing
+}
+
+FrontendServer
+	brokerList
+	addBroker()
+	publish()
+DbServer
+	brokerList
+	addBroker()
+	publish()
+
+DbReplica
+	brokerList
+	addBroker()
+	publish()
+
+ChatServer
+	brokerList
+	addBroker()
+	publish()
+
+ShoppingCart
+	brokerList
+	addBroker()
+	publish()
+
+BackendServer
+	brokerList
+	addBroker()
+	publish()
+
+BrokerMetrics
+	pub-sub table
+	publishAll
+	
+BrokerLogging
+	pub-sub table
+	publishAll
+
+BrokerTracking
+	pub-sub table
+	publishAll
+
+MetricsUI
+	addBroker
+	subscribe
+	rcvEvent
+
+MetricsAnalysis
+	addBroker
+	subscribe
+	rcvEvent
+
+ActiveMonitoring
+	addBroker
+	subscribe
+	rcvEvent
+
+DbMonitor
+	addBroker
+	subscribe
+	rcvEvent
+
+LogSearch
+	addBroker
+	subscribe
+	rcvEvent
+
+SecurityAnalysis
+	addBroker
+	subscribe
+	rcvEvent
+
+OfflineProcessing
+	addBroker
+	subscribe
+	rcvEvent
+
+BrokerMetrics
+	addPublisher
+	map { pub : list<subscribers>}
+	publish() {
+	publishAll(map1)}
+
+BrokerLoggin
+	addPublisher
+	map { pub : list<subscribers>}
+	publish() {
+	publishAll(map1)}
+
+BrokerTracking
+	addPublisher
+	map { pub : list<subscribers>}
+	publish() {
+	publishAll(map1)}
